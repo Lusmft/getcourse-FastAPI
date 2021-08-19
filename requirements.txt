@@ -9,3 +9,5 @@ python-multipart
 sqlalchemy
 requests
 pytest
+pytest-asyncio
+httpx

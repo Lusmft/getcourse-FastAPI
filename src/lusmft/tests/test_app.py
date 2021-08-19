@@ -1,5 +1,6 @@
 import sys
 import os
+import pytest
 
 PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
@@ -170,6 +171,19 @@ def test_import_deals():
     assert data['action'] == 'add'
     assert data['result']['success'] == True, data['result']['error_message']
     
+
+from httpx import AsyncClient
+
+
+@pytest.mark.asyncio
+async def test_async():
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+        response = await ac.post(
+        "/auth/sign-in/", 
+        data={"username": "userr", "password": "chimichangas4life", 'grant_type': '', 'scope': '', 'client_id': '', 'client_secret': ''},
+    )
+    assert response.status_code == 200, response.text
+
     
 def test_remove_db():
     path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test.sqlite3')
