@@ -5,13 +5,13 @@ from fastapi import (
 )
 from fastapi.security import OAuth2PasswordRequestForm
 
-from models.auth import (
+from app.models.auth import (
     Token,
     UserCreate,
     User,
 )
 
-from services.auth import (
+from app.services.auth import (
     AuthService,
     get_current_user,
 )

@@ -7,7 +7,7 @@ from fastapi import (
     status,
 )
 
-from models.deals import (
+from app.models.deals import (
     SettingsData,
     UserData,
     SystemData,
@@ -15,14 +15,14 @@ from models.deals import (
     DealData,
     )
     
-from models.auth import User
+from app.models.auth import User
 
-from services.auth import (
+from app.services.auth import (
     AuthService,
     get_current_user,
 )
 
-from services.deals import DealsService
+from app.services.deals import DealsService
 
 
 router = APIRouter(
