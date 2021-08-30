@@ -1,4 +1,4 @@
-import requests, json, datetime
+import requests, json
 
 from typing import Dict
 
@@ -7,7 +7,7 @@ from fastapi import (
     status,
 )
 
-from models.deals import (
+from app.models.deals import (
     SettingsData,
     UserData,
     SystemData,
