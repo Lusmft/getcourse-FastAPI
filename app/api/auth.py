@@ -1,5 +1,3 @@
-import rootdir
-
 from fastapi import (
     APIRouter,
     Depends,

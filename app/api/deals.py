@@ -1,5 +1,3 @@
-import rootdir
-
 from typing import Dict
 
 from fastapi import (

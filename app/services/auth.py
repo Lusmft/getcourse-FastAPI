@@ -1,5 +1,3 @@
-import rootdir
-
 from datetime import (
     datetime,
     timedelta,

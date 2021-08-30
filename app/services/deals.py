@@ -1,4 +1,3 @@
-import rootdir
 import requests, json, datetime
 
 from typing import Dict
