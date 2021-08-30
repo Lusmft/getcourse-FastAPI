@@ -4,8 +4,8 @@ from app.settings import settings
 
 if not os.path.exists('./database.sqlite3'):
     # Инициализация базы данных
-    from database import engine
-    from tables import Base
+    from app.database import engine
+    from app.tables import Base
     Base.metadata.create_all(engine)
 
 # Запуск веб-сервиса
