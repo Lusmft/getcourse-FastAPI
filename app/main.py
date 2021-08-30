@@ -1,6 +1,6 @@
-import os
+import uvicorn, os
 
-from app.settings import settings
+from settings import settings
 
 if not os.path.exists('./database.sqlite3'):
     # Инициализация базы данных
@@ -9,36 +9,9 @@ if not os.path.exists('./database.sqlite3'):
     Base.metadata.create_all(engine)
 
 # Запуск веб-сервиса
-from fastapi import FastAPI
-
-from fastapi import APIRouter
-
-from app.api import auth
-from app.api import deals
-
-
-router = APIRouter()
-router.include_router(auth.router)
-router.include_router(deals.router)
-
-
-tags_metadata = [
-    {
-        'name': 'auth',
-        'description': 'Авторизация и регистрация',
-    },
-    {
-        'name': 'deals',
-        'description': 'Импортирование/обновление сделки',
-    }
-]
-
-app = FastAPI(
-    title='getcourse-FastAPI',
-    description='Сервис для импортирования/обновления сделок в getcourse.ru',
-    version='1.0.0',
-    openapi_tags=tags_metadata,
+uvicorn.run(
+    'app:app',
+    host=settings.server_host,
+    port=settings.server_port,
+    reload=False,
 )
-
-app.include_router(router)
-

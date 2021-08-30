@@ -17,15 +17,15 @@ from passlib.hash import bcrypt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
-from app.models.auth import (
+from models.auth import (
     User,
     UserCreate,
     Token,
 )
 
-import app.tables
-from app.database import get_session
-from app.settings import settings
+import tables
+from database import get_session
+from settings import settings
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/sign-in/')
@@ -70,7 +70,7 @@ class AuthService:
         return user
 
     @classmethod
-    def create_token(cls, user: app.tables.User) -> Token:
+    def create_token(cls, user: tables.User) -> Token:
         user_data = User.from_orm(user)
         now = datetime.utcnow()
         payload = {
@@ -100,15 +100,15 @@ class AuthService:
             headers={'WWW-Authenticate': 'Bearer'},
         )
             
-        user = app.tables.User(
+        user = tables.User(
             email=user_data.email,
             username=user_data.username,
             password_hash=self.hash_password(user_data.password),
         )
         user_exists = (
             self.session
-            .query(app.tables.User)
-            .filter(app.tables.User.username == user.username)
+            .query(tables.User)
+            .filter(tables.User.username == user.username)
             .first()
         )
 
@@ -132,8 +132,8 @@ class AuthService:
 
         user = (
             self.session
-            .query(app.tables.User)
-            .filter(app.tables.User.username == username)
+            .query(tables.User)
+            .filter(tables.User.username == username)
             .first()
         )
 

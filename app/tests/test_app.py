@@ -10,9 +10,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.tables import Base
-from app.database import get_session
-from app.main import app
+from tables import Base
+from database import get_session
+from app import app
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.sqlite3"
@@ -186,4 +186,5 @@ async def test_async():
 
     
 def test_remove_db():
-    os.remove('test.sqlite3')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test.sqlite3')
+    os.remove(path)
